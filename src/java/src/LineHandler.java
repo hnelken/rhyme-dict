@@ -24,6 +24,11 @@ public class LineHandler extends DefaultHandler {
 	
 	public void characters(char[] ch, int start, int length) {
 		// append any characters to the string builder
+		for (int i = 0; i < ch.length; i++) {
+			if (ch[i] == '�') {
+				System.out.println("FUCK");
+			}
+		}
 		if (builder != null) {
 			builder.append(new String(ch, start, length));
 		}
@@ -64,7 +69,7 @@ public class LineHandler extends DefaultHandler {
 		// Clean the word/definition for the database
 		word = cleanString(word);
 		definition = cleanString(definition);
-		System.out.println(word + ":\n" + definition + '\n');
+		//System.out.println(word + ":\n" + definition + '\n');
 		
 //		int wordID = getWordID(word);
 //		if (wordID == -1) {
