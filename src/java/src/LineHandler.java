@@ -22,14 +22,6 @@ public class LineHandler extends DefaultHandler {
 		this.c = conn;
 	}
 	
-	public String getWord() {
-		return word;
-	}
-	
-	public String getDefinition() {
-		return definition;
-	}
-	
 	public void characters(char[] ch, int start, int length) {
 		// append any characters to the string builder
 		if (builder != null) {
@@ -62,9 +54,9 @@ public class LineHandler extends DefaultHandler {
 	
 	private String cleanString(String string) {
 		String clean = string.replace("'", "\'");
-		clean = string.replace("–", "-");
+		//clean = string.replace("–", "-");
 		clean = string.replace("\"", "\\\"");
-		clean = string.replace("�", "-");
+		//clean = string.replace("�", "-");
 		return clean;
 	}
 	

@@ -25,13 +25,11 @@ public class DatabaseCreator {
 	    			+ "text		TEXT	NOT NULL, "
 	    			+ "FOREIGN KEY(word_id) REFERENCES words(id))";
 	    	
-	    	String pronsTable = "CREATE TABLE pronounces("
+	    	String pronsTable = "CREATE TABLE pronounciations("
 	    			+ "id		INTEGER	PRIMARY KEY	NOT NULL, "
 	    			+ "word_id	INTEGER NOT NULL, "
-	    			+ "def_id	INTEGER	NOT NULL, "
 	    			+ "text		TEXT	NOT NULL, "
-	    			+ "FOREIGN KEY(word_id) REFERENCES words(id), "
-	    			+ "FOREIGN KEY(def_id) REFERENCES definitions(id))";
+	    			+ "FOREIGN KEY(word_id) REFERENCES words(id))";
 	    	
 	    	stmt.executeUpdate(wordsTable);
 	    	stmt.executeUpdate(defsTable);
