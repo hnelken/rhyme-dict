@@ -21,29 +21,15 @@ public class OPTEDParser {
 	    	System.out.println("...connected to DB");
 	    	
 	    	// Setup for parsing
-		    LineHandler handler = new LineHandler(c);
-		    SAXParserImpl parser = SAXParserImpl.newInstance(null);
+		   // LineHandler handler = new LineHandler(c);
+		   // SAXParserImpl parser = SAXParserImpl.newInstance(null);
 		    
 		    // Parse the dictionary
-		    char index = 'a';
-		    while (index <= 'z'){
-		    	parseFile("lib/opted/wb1913_" + index + ".html");
-		    	 
+		    for (char index = 'c'; index <= 'c'; index++){
+		    	parseFile("lib/opted/wb1913_" + index + ".html", c);
 		    }
-		   
-//		    char index = 'a';
-//		    while (index <= 'z'){
-//		    	System.out.println("...parsing letter '" + index + "'");
-//		    	parser.parse(
-//		    			new FileInputStream("lib/opted/wb1913_" + index + ".html"), 
-//		    			handler);
-//		    	index++;
-//		    }
-//		    System.out.println("...parsing recent additions");
-//		    parser.parse(
-//	    			new FileInputStream("lib/opted/wb1913_new.html"), 
-//	    			handler);
-//		    
+		    //parseFile("lib/opted/wb1913_new.html", c);
+		    
 		    // Close the DB connection
 	    	c.close();
 	    	System.out.println("...done.");
@@ -54,10 +40,22 @@ public class OPTEDParser {
 	    }
     }
 	
-	private static void parseFile(String file) {
-		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(""), StandardCharsets.UTF_8))) {
+	private static void parseFile(String file, Connection c) {
+		System.out.println("parsing " + file);
+		
+		// Begin reading the given filename
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
+
+			boolean body = false;
 			for(String line; (line = br.readLine()) != null; ) {
-				// parse the line here
+
+				// Ignore everything but the HTML body
+				if (body) {
+					body = parseLine(line, c);
+				}
+				else if (line.equals("<BODY>")) {
+					body = true;
+				}
 			}
 		}
 		catch (Exception e) {
@@ -65,29 +63,42 @@ public class OPTEDParser {
 		}
 	}
 	
-	private static String cleanString(String string) {
-		String clean = string.replace("'", "\'");
-		//clean = string.replace("–", "-");
-		clean = string.replace("\"", "\\\"");
-		//clean = string.replace("�", "-");
-		return clean;
+	private static boolean parseLine(String line, Connection c) {
+		// Stop and signal when the body ends
+		if (line.equals("</BODY>")) { return false; }
+		
+		// Otherwise parse the line
+		// Lines of the form: 
+		//		<P><B>word</B> (<I>part of speech</I>) definition</P>
+		
+		// Remove unnecessary HTML text
+		line = line.replaceAll("</P>|<P>|<B>| \\(<I>(.*)</I>\\) ", "");
+		
+		// Separate word and definition
+		String[] parts = line.split("</B>");
+		String word = parts[0];
+		String definition = parts[1];
+		
+		// Insert word and definition in database
+		commitWord(word, definition, c);
+		
+		return true;
 	}
 	
 	private static void commitWord(String word, String definition, Connection c) {
 		// Clean the word/definition for the database
 		word = cleanString(word);
 		definition = cleanString(definition);
-		//System.out.println(word + ":\n" + definition + '\n');
 		
-//		int wordID = getWordID(word, c);
-//		if (wordID == -1) {
-//    		// Word exists, insert definition only
-//			insertWord(word, c);
-//    	}
-//    	else {
-//    		// Word doesn't exist, insert new word and its definition
-//    		insertDefinition(definition, wordID, c);
-//    	}
+		int wordID = getWordID(word, c);
+		if (wordID == -1) {
+    		// Word doesn't exist, insert new word and its definition
+			insertWord(word, definition, c);
+    	}
+    	else {
+    		// Word exists, insert definition only
+    		insertDefinition(definition, wordID, c);
+    	}
 		
 	}
 	
@@ -104,7 +115,12 @@ public class OPTEDParser {
 	    	stmt.close();
 	    	
 	    	// Get the ID of this word to insert its definition
+	    	System.out.println(word);
 	    	int wordID = getWordID(word, c);
+	    	if (wordID == -1) {
+	    		System.out.println("FUCK--" + word);
+	    		System.exit(0);
+	    	}
 	    	insertDefinition(definition, wordID, c);
 		}
 		catch (Exception e) {
@@ -137,7 +153,8 @@ public class OPTEDParser {
 		try {
     		// Check DB if word is contained
 	    	Statement stmt = c.createStatement();
-	    	String sql = "SELECT id FROM words WHERE text='" + word + "'";
+	    	//stmt.setString(1, word);
+	    	String sql = "SELECT * FROM words WHERE text='" + word + "'";
 	    	
 	    	// Word exists if this query returns any results
 	    	ResultSet results = stmt.executeQuery(sql);
@@ -153,5 +170,13 @@ public class OPTEDParser {
 		catch (Exception e) {
 			return wordID;
 		}
+	}
+	
+	private static String cleanString(String string) {
+		String clean = string.replace("'", "\\'");
+		//clean = string.replace("–", "-");
+		clean = string.replace("\"", "\\\"");
+		//clean = string.replace("�", "-");
+		return clean;
 	}
 }
