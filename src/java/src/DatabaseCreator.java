@@ -22,24 +22,39 @@ public class DatabaseCreator {
 	    	StringBuilder builder = new StringBuilder();
 	    	BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("lib/dict.sql"), StandardCharsets.UTF_8));
 	    	for(String line; (line = br.readLine()) != null; ) {
-	    		if (line.length() != 0 && line.charAt(line.length() - 1) == '(') {
-	    			assembling = true;
-	    		}
 	    		
-	    		if (assembling) {
-	    			if (line.length() == 0) {
-	    				assembling = false;
-	    				stmt.executeUpdate(builder.toString());
-	    				builder = new StringBuilder();
-	    			}
-	    			else {
-		    			builder.append(line);
-		    			builder.append('\n');
-	    			}
-	    		}
-	    		else {
-	    			stmt.executeUpdate(line);
-	    		}
+	    		
+		    		if (line.length() != 0 && line.charAt(line.length() - 1) == '(') {
+		    			assembling = true;
+		    		}
+		    		
+		    		if (assembling) {
+		    			if (line.length() == 0) {
+		    				assembling = false;
+		    				stmt.executeUpdate(builder.toString());
+		    				builder = new StringBuilder();
+		    			}
+		    			else {
+			    			builder.append(line);
+			    			builder.append('\n');
+		    			}
+		    		}
+		    		else {
+		    			if (line.contains("INSERT") && line.contains("\\")) {
+		    				if (line.contains("wn_gloss")) {
+		    					line = line.replace("\\", "");
+		    				}
+		    				else if (line.contains("wn_synset")) {
+		    					String pre = line.substring(0, 44);
+		    					String word = line.substring(45, line.length() - 11);
+		    					String post = line.substring(line.length() - 10);
+		    					word = "\"" + line.substring(45, line.length() - 11).replace("\\", "") + "\"";
+		    					line = pre + word + post;
+		    				}
+			    		}
+		    			stmt.executeUpdate(line);
+		    		}
+	    		
 	    	}
 	    	br.close();
 	    	
@@ -77,4 +92,12 @@ public class DatabaseCreator {
 	    	System.exit(0);	
 	    }
     }
+	
+	private static String cleanString(String string) {
+		String clean = string.replace("'", "\\'");
+		//clean = string.replace("–", "-");
+		clean = string.replace("\"", "\\\"");
+		//clean = string.replace("�", "-");
+		return clean;
+	}
 }
