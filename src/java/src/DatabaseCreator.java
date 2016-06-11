@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
 public class DatabaseCreator {
@@ -14,8 +18,33 @@ public class DatabaseCreator {
 	    	System.out.println("DB Connection Successful");
 	    	stmt = c.createStatement();
 
+	    	boolean assembling = false;
+	    	StringBuilder builder = new StringBuilder();
+	    	BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("lib/dict.sql"), StandardCharsets.UTF_8));
+	    	for(String line; (line = br.readLine()) != null; ) {
+	    		if (line.length() != 0 && line.charAt(line.length() - 1) == '(') {
+	    			assembling = true;
+	    		}
+	    		
+	    		if (assembling) {
+	    			if (line.length() == 0) {
+	    				assembling = false;
+	    				stmt.executeUpdate(builder.toString());
+	    				builder = new StringBuilder();
+	    			}
+	    			else {
+		    			builder.append(line);
+		    			builder.append('\n');
+	    			}
+	    		}
+	    		else {
+	    			stmt.executeUpdate(line);
+	    		}
+	    	}
+	    	br.close();
+	    	
 	    	// Create the tables
-	    	String wordsTable = "CREATE TABLE words("
+	    	/*String wordsTable = "CREATE TABLE words("
 	    			+ "id	INTEGER	PRIMARY KEY	NOT NULL, "
 	    			+ "text	TEXT	NOT NULL)";
 	    	
@@ -34,6 +63,7 @@ public class DatabaseCreator {
 	    	stmt.executeUpdate(wordsTable);
 	    	stmt.executeUpdate(defsTable);
 	    	stmt.executeUpdate(pronsTable);
+	    	*/
 	    	
 		    // Close up shop
 	    	stmt.close();
