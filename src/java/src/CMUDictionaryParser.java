@@ -33,6 +33,16 @@ public class CMUDictionaryParser {
 		    	}
 		    }
 		    
+		    
+		    /**
+		     * New process for parse
+		     * 	- Parse CMU dict
+		     * 		- Insert entry with both texts
+		     * 	- Run through all entries
+		     * 		- If pronounce text matches a wn_synset word
+		     * 			- insert the pronounce id in the wn_synset entry
+		     */
+		    
 		    // Close up shop
 		    br.close();
 	    	c.close();
