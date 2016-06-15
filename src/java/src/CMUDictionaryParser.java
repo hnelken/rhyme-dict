@@ -19,7 +19,7 @@ public class CMUDictionaryParser {
 	    	System.out.println("DB Connection Successful");
 			
 			// Parse the CMU Pronouncing Dictionary line by line
-			BufferedReader br = new BufferedReader(new FileReader("lib/opted/"));
+			BufferedReader br = new BufferedReader(new FileReader("lib/cmudict-0-7b"));
 		    for(String line; (line = br.readLine()) != null; ) {
 		        // Ignore comments beginning with ";"
 		    	if (line.charAt(0) != ';') {
@@ -65,12 +65,14 @@ public class CMUDictionaryParser {
 		try {
     		// Check DB if word is contained
 	    	Statement stmt = c.createStatement();
-	    	String sql = "SELECT id FROM words WHERE text='" + word + "'";
+	    	String sql = "SELECT * FROM wn_synset WHERE text=\"" + word + "\"";
 	    	
 	    	// Word exists if this query returns any results
 	    	ResultSet results = stmt.executeQuery(sql);
 	    	if (results.next()) {
 	    		wordID = results.getInt("id");
+	    		String text = results.getString("text");
+	    		System.out.println("");
 	    	}
 	    	
 	    	// Close up shop and return word ID

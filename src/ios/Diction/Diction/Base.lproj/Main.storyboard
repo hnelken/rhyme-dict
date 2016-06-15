@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Diction" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HELLO MOTHER FUCKER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VA2-R1-XWc">
+                                <rect key="frame" x="202" y="289" width="196" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="196" id="AY9-JS-YfZ"/>
+                                    <constraint firstAttribute="height" constant="21" id="yld-Ka-Xix"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQ1-lf-1eh">
+                                <rect key="frame" x="277" y="348" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="OX2-sB-eCg"/>
+                                    <constraint firstAttribute="height" constant="30" id="UZp-1W-nkI"/>
+                                </constraints>
+                                <state key="normal" title="Off"/>
+                                <connections>
+                                    <action selector="offButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dd1-QN-Ki0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YU9-mq-STW">
+                                <rect key="frame" x="277" y="216" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="482-sb-sML"/>
+                                    <constraint firstAttribute="width" constant="46" id="Hkq-6f-ecr"/>
+                                </constraints>
+                                <state key="normal" title="On"/>
+                                <connections>
+                                    <action selector="onButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aed-em-Ce8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VA2-R1-XWc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FHB-Oi-TME"/>
+                            <constraint firstItem="VA2-R1-XWc" firstAttribute="top" secondItem="YU9-mq-STW" secondAttribute="bottom" constant="43" id="MKh-xD-VFA"/>
+                            <constraint firstItem="eQ1-lf-1eh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Qle-wV-hqC"/>
+                            <constraint firstItem="YU9-mq-STW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eAJ-lu-fDw"/>
+                            <constraint firstItem="VA2-R1-XWc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="k7S-ru-YrO"/>
+                            <constraint firstItem="eQ1-lf-1eh" firstAttribute="top" secondItem="VA2-R1-XWc" secondAttribute="bottom" constant="38" id="nA2-Fo-gxE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textLabel" destination="VA2-R1-XWc" id="l1S-yB-x6O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="671" y="306"/>
+        </scene>
+    </scenes>
+</document>
