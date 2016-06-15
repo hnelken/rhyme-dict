@@ -72,42 +72,14 @@ public class DatabaseCreator {
 		    					//System.out.println(line);
 		    				}
 			    		}
-		    			
-	/* 
-	`ss_type` char(2) default NULL,
-	`sense_number` decimal(10,0) NOT NULL default '0',
-	`tag_count` decimal(10,0) default NULL,
-	*/
 
+		    			// Execute the SQL statement
 		    			stmt.executeUpdate(line);
 		    		}
-	    		
 	    	}
-	    	br.close();
-	    	
-	    	// Create the tables
-	    	/*String wordsTable = "CREATE TABLE words("
-	    			+ "id	INTEGER	PRIMARY KEY	NOT NULL, "
-	    			+ "text	TEXT	NOT NULL)";
-	    	
-	    	String defsTable = "CREATE TABLE definitions("
-	    			+ "id		INTEGER	PRIMARY KEY	NOT NULL, "
-	    			+ "word_id	INTEGER	NOT NULL, "
-	    			+ "text		TEXT	NOT NULL, "
-	    			+ "FOREIGN KEY(word_id) REFERENCES words(id))";
-	    	
-	    	String pronsTable = "CREATE TABLE pronounciations("
-	    			+ "id		INTEGER	PRIMARY KEY	NOT NULL, "
-	    			+ "word_id	INTEGER NOT NULL, "
-	    			+ "text		TEXT	NOT NULL, "
-	    			+ "FOREIGN KEY(word_id) REFERENCES words(id))";
-	    	
-	    	stmt.executeUpdate(wordsTable);
-	    	stmt.executeUpdate(defsTable);
-	    	stmt.executeUpdate(pronsTable);
-	    	*/
 	    	
 		    // Close up shop
+	    	br.close();
 	    	stmt.close();
 	    	c.close();
 	    	
