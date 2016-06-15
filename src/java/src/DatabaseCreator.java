@@ -40,18 +40,45 @@ public class DatabaseCreator {
 		    			}
 		    		}
 		    		else {
-		    			if (line.contains("INSERT") && line.contains("\\")) {
-		    				if (line.contains("wn_gloss")) {
-		    					line = line.replace("\\", "");
+		    			if (line.contains("INSERT")) {
+		    				if (line.contains("wn_gloss") && line.contains("\\")) {
+	    						line = line.replace("\\", "");
 		    				}
 		    				else if (line.contains("wn_synset")) {
-		    					String pre = line.substring(0, 44);
-		    					String word = line.substring(45, line.length() - 11);
-		    					String post = line.substring(line.length() - 10);
-		    					word = "\"" + line.substring(45, line.length() - 11).replace("\\", "") + "\"";
-		    					line = pre + word + post;
+		    					String pre = null;
+		    					String word = null;
+		    					if (line.charAt(43) == ',') {
+			    					pre = line.substring(0, 44);
+			    					word = line.substring(45);
+		    					}
+		    					else {
+		    						pre = line.substring(0, 45);
+		    						word = line.substring(46);
+		    					}
+
+		    					int endWord = word.indexOf('\'');
+		    					boolean searching = true;
+		    					while (searching) {
+			    					if (word.charAt(endWord + 1) != ',') {
+			    						endWord = word.indexOf('\'', endWord + 1);
+			    					}
+			    					else {
+			    						searching = false;
+			    					}
+		    					}
+		    					word = "\"" + word.substring(0, endWord).replace("\\", "") + "\"";
+		    					
+		    					line = pre + word + ");";
+		    					//System.out.println(line);
 		    				}
 			    		}
+		    			
+	/* 
+	`ss_type` char(2) default NULL,
+	`sense_number` decimal(10,0) NOT NULL default '0',
+	`tag_count` decimal(10,0) default NULL,
+	*/
+
 		    			stmt.executeUpdate(line);
 		    		}
 	    		
