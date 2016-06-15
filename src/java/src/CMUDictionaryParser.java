@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CMUDictionaryParser {
 
@@ -44,11 +46,11 @@ public class CMUDictionaryParser {
 	
 	private static void commitPronounciation(String word, String prnc, Connection c) {
 		try {
-			int wordID = getWordID(word, c);
-			if (wordID != -1) {
+			List<Integer> wordIDs = getMatchIDs(word, c);
+			for (int i = 0; i < wordIDs.size(); i++) {
 				String sql = "INSERT INTO pronounces(word_id, text) VALUES(?, ?)";
 				PreparedStatement stmt = c.prepareStatement(sql);
-				stmt.setInt(1, wordID);
+				stmt.setInt(1, wordIDs.get(i));
 				stmt.setString(2, prnc);
 				stmt.executeUpdate();
 			}
@@ -58,30 +60,35 @@ public class CMUDictionaryParser {
 		}
 	}
 
-	private static int getWordID(String word, Connection c) {
-		// Return -1 if word doesn't exist
-		int wordID = -1;
+	private static List<Integer> getMatchIDs(String word, Connection c) {
+		List<Integer> matches = new ArrayList<Integer>();
 		
 		try {
     		// Check DB if word is contained
-	    	Statement stmt = c.createStatement();
-	    	String sql = "SELECT * FROM wn_synset WHERE text=\"" + word + "\"";
+	    	PreparedStatement stmt = c.prepareStatement("SELECT * FROM wn_synset WHERE word=?");
+	    	stmt.setString(1, word);
 	    	
 	    	// Word exists if this query returns any results
-	    	ResultSet results = stmt.executeQuery(sql);
-	    	if (results.next()) {
-	    		wordID = results.getInt("id");
-	    		String text = results.getString("text");
-	    		System.out.println("");
+	    	ResultSet results = stmt.executeQuery();
+	    	boolean stop = false;
+	    	while (results.next() && !stop) {
+	    		int wordID = results.getInt("synset_id");
+	    		String text = results.getString("word");
+	    		
+	    		if (text.equals(word)) {
+	    			matches.add(wordID);
+		    		System.out.println(text + " " + wordID);
+		    		System.exit(0);
+	    		}
 	    	}
 	    	
 	    	// Close up shop and return word ID
 	    	results.close();
 	    	stmt.close();
-	    	return wordID;
+	    	return matches;
 		}
 		catch (Exception e) {
-			return wordID;
+			return matches;
 		}
 	}
 }

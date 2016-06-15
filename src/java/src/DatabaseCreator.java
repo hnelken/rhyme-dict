@@ -66,10 +66,9 @@ public class DatabaseCreator {
 			    						searching = false;
 			    					}
 		    					}
-		    					word = "\"" + word.substring(0, endWord).replace("\\", "") + "\"";
+		    					word = "\"" + word.substring(0, endWord).replace("\\", "").toUpperCase() + "\"";
 		    					
 		    					line = pre + word + ");";
-		    					//System.out.println(line);
 		    				}
 			    		}
 
@@ -91,12 +90,4 @@ public class DatabaseCreator {
 	    	System.exit(0);	
 	    }
     }
-	
-	private static String cleanString(String string) {
-		String clean = string.replace("'", "\\'");
-		//clean = string.replace("–", "-");
-		clean = string.replace("\"", "\\\"");
-		//clean = string.replace("�", "-");
-		return clean;
-	}
 }

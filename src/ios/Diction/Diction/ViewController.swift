@@ -23,15 +23,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onButton(sender: AnyObject) {
-        textLabel.v
+        textLabel.textColor = UIColor.blackColor()
     }
 
     
     @IBAction func offButton(sender: AnyObject) {
-        
+        textLabel.textColor = UIColor.whiteColor()
     }
-    
-
-
 }
 
