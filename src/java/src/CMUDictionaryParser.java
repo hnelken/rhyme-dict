@@ -33,16 +33,6 @@ public class CMUDictionaryParser {
 		    	}
 		    }
 		    
-		    
-		    /**
-		     * New process for parse
-		     * 	- Parse CMU dict
-		     * 		- Insert entry with both texts
-		     * 	- Run through all entries
-		     * 		- If pronounce text matches a wn_synset word
-		     * 			- insert the pronounce id in the wn_synset entry
-		     */
-		    
 		    // Close up shop
 		    br.close();
 	    	c.close();
@@ -54,51 +44,70 @@ public class CMUDictionaryParser {
 
 	}
 	
+	// Inserts a pronunciation record and the links it with all matching words
 	private static void commitPronounciation(String word, String prnc, Connection c) {
 		try {
-			List<Integer> wordIDs = getMatchIDs(word, c);
-			for (int i = 0; i < wordIDs.size(); i++) {
-				String sql = "INSERT INTO pronounces(word_id, text) VALUES(?, ?)";
-				PreparedStatement stmt = c.prepareStatement(sql);
-				stmt.setInt(1, wordIDs.get(i));
-				stmt.setString(2, prnc);
-				stmt.executeUpdate();
-			}
+			// Insert pronunciation into the database
+			String sql = "INSERT INTO prncs(word, prnc) VALUES(?, ?)";
+			PreparedStatement stmt = c.prepareStatement(sql);
+			stmt.setString(1, word);
+			stmt.setString(2, prnc);
+			stmt.executeUpdate();
+
+			// Get the pronunciation's id
+			int prncID = getPronounciationID(word, c);
+			
+			linkWord(word, prncID, c);
 		}
 		catch (Exception E) {
 			System.out.println("Failed to add " + word + " to DB.");
 		}
 	}
-
-	private static List<Integer> getMatchIDs(String word, Connection c) {
-		List<Integer> matches = new ArrayList<Integer>();
+	
+	// Adds an entry into a word-pronunciation relation table
+	private static void linkWord(String word, int prncID, Connection c) throws Exception {
+		// Strip CMU dictionary word of potential "(*)" suffix
+		word = word.replaceAll("\\(.*\\)", "");
 		
-		try {
-    		// Check DB if word is contained
-	    	PreparedStatement stmt = c.prepareStatement("SELECT * FROM wn_synset WHERE word=?");
-	    	stmt.setString(1, word);
-	    	
-	    	// Word exists if this query returns any results
-	    	ResultSet results = stmt.executeQuery();
-	    	boolean stop = false;
-	    	while (results.next() && !stop) {
-	    		int wordID = results.getInt("synset_id");
-	    		String text = results.getString("word");
-	    		
-	    		if (text.equals(word)) {
-	    			matches.add(wordID);
-		    		System.out.println(text + " " + wordID);
-		    		System.exit(0);
-	    		}
-	    	}
-	    	
-	    	// Close up shop and return word ID
-	    	results.close();
-	    	stmt.close();
-	    	return matches;
-		}
-		catch (Exception e) {
-			return matches;
-		}
+		// Query words in database for matches to CMU word, then insert record in relation table
+    	PreparedStatement insert = c.prepareStatement("INSERT INTO word_prnc VALUES(?, ?, ?)");
+    	PreparedStatement query = c.prepareStatement("SELECT synset_id, word_num FROM wn_synset WHERE word=?");
+    	query.setString(1, word);
+    	
+    	ResultSet results = query.executeQuery();
+    	while (results.next()) {
+    		// Get IDs from matched entry
+    		int synsetID = results.getInt("synset_id");
+    		int wordNum = results.getInt("word_num");
+    		
+    		// For each result, add an entry in the word_prnc relation table
+    		insert.setInt(1, synsetID);
+    		insert.setInt(2, wordNum);
+    		insert.setInt(3, prncID);
+    	}
+    	
+    	// Close up shop and return word ID
+    	results.close();
+    	insert.close();
+    	query.close();
+	}
+	
+	// Returns an ID for a word in the CMU pronouncing dictionary
+	private static int getPronounciationID(String word, Connection c) throws Exception {
+		// Query pronunciations for matching CMU word
+    	PreparedStatement stmt = c.prepareStatement("SELECT prnc_id FROM prncs WHERE word=?");
+    	stmt.setString(1, word);
+		int prncID = -1;
+    	
+    	// Word exists if this query returns any results
+    	ResultSet results = stmt.executeQuery();
+    	while (results.next()) {
+    		prncID = results.getInt("prnc_id");
+    	}
+    	
+    	// Close up shop and return pronunciation ID
+    	results.close();
+    	stmt.close();
+    	return prncID;
 	}
 }
