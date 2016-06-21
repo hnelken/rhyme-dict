@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8269ABE1D18D74900A3DAFE /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8269ABD1D18D74900A3DAFE /* libsqlite3.0.tbd */; };
+		D8269AC11D18D7F600A3DAFE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AC01D18D7F600A3DAFE /* Constants.swift */; };
+		D8269AC31D18DBD300A3DAFE /* dictionary.db in Resources */ = {isa = PBXBuildFile; fileRef = D8269AC21D18DBD300A3DAFE /* dictionary.db */; };
+		D8269AC71D18DD0D00A3DAFE /* DictionaryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */; };
+		D8269AE71D18E07900A3DAFE /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269ADD1D18E07900A3DAFE /* FMDatabase.m */; };
+		D8269AE81D18E07900A3DAFE /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269ADF1D18E07900A3DAFE /* FMDatabaseAdditions.m */; };
+		D8269AE91D18E07900A3DAFE /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269AE11D18E07900A3DAFE /* FMDatabasePool.m */; };
+		D8269AEA1D18E07900A3DAFE /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269AE31D18E07900A3DAFE /* FMDatabaseQueue.m */; };
+		D8269AEB1D18E07900A3DAFE /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269AE61D18E07900A3DAFE /* FMResultSet.m */; };
 		D85D92681D120AC4002BC94D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D92671D120AC4002BC94D /* AppDelegate.swift */; };
 		D85D926A1D120AC4002BC94D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D92691D120AC4002BC94D /* ViewController.swift */; };
 		D85D926D1D120AC4002BC94D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85D926B1D120AC4002BC94D /* Main.storyboard */; };
@@ -15,6 +24,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D8269ABD1D18D74900A3DAFE /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		D8269AC01D18D7F600A3DAFE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D8269AC21D18DBD300A3DAFE /* dictionary.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = dictionary.db; sourceTree = "<group>"; };
+		D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryInterface.swift; sourceTree = "<group>"; };
+		D8269ADB1D18E07800A3DAFE /* Diction-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Diction-Bridging-Header.h"; sourceTree = "<group>"; };
+		D8269ADC1D18E07900A3DAFE /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = fmdb/FMDatabase.h; sourceTree = "<group>"; };
+		D8269ADD1D18E07900A3DAFE /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = fmdb/FMDatabase.m; sourceTree = "<group>"; };
+		D8269ADE1D18E07900A3DAFE /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		D8269ADF1D18E07900A3DAFE /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		D8269AE01D18E07900A3DAFE /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
+		D8269AE11D18E07900A3DAFE /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
+		D8269AE21D18E07900A3DAFE /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		D8269AE31D18E07900A3DAFE /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		D8269AE41D18E07900A3DAFE /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = fmdb/FMDB.h; sourceTree = "<group>"; };
+		D8269AE51D18E07900A3DAFE /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = fmdb/FMResultSet.h; sourceTree = "<group>"; };
+		D8269AE61D18E07900A3DAFE /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = fmdb/FMResultSet.m; sourceTree = "<group>"; };
 		D85D92641D120AC4002BC94D /* Diction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85D92671D120AC4002BC94D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D85D92691D120AC4002BC94D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,12 +54,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8269ABE1D18D74900A3DAFE /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D8269ABF1D18D7BE00A3DAFE /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				D8269AEC1D18E08200A3DAFE /* fmdb */,
+				D8269ADB1D18E07800A3DAFE /* Diction-Bridging-Header.h */,
+				D8269AC21D18DBD300A3DAFE /* dictionary.db */,
+				D85D926E1D120AC4002BC94D /* Assets.xcassets */,
+				D85D92731D120AC5002BC94D /* Info.plist */,
+				D8269ABD1D18D74900A3DAFE /* libsqlite3.0.tbd */,
+			);
+			name = Extras;
+			sourceTree = "<group>";
+		};
+		D8269AEC1D18E08200A3DAFE /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				D8269ADC1D18E07900A3DAFE /* FMDatabase.h */,
+				D8269ADD1D18E07900A3DAFE /* FMDatabase.m */,
+				D8269ADE1D18E07900A3DAFE /* FMDatabaseAdditions.h */,
+				D8269ADF1D18E07900A3DAFE /* FMDatabaseAdditions.m */,
+				D8269AE01D18E07900A3DAFE /* FMDatabasePool.h */,
+				D8269AE11D18E07900A3DAFE /* FMDatabasePool.m */,
+				D8269AE21D18E07900A3DAFE /* FMDatabaseQueue.h */,
+				D8269AE31D18E07900A3DAFE /* FMDatabaseQueue.m */,
+				D8269AE41D18E07900A3DAFE /* FMDB.h */,
+				D8269AE51D18E07900A3DAFE /* FMResultSet.h */,
+				D8269AE61D18E07900A3DAFE /* FMResultSet.m */,
+			);
+			name = fmdb;
+			sourceTree = "<group>";
+		};
 		D85D925B1D120AC4002BC94D = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +111,13 @@
 		D85D92661D120AC4002BC94D /* Diction */ = {
 			isa = PBXGroup;
 			children = (
+				D85D926B1D120AC4002BC94D /* Main.storyboard */,
+				D85D92701D120AC4002BC94D /* LaunchScreen.storyboard */,
+				D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */,
 				D85D92671D120AC4002BC94D /* AppDelegate.swift */,
 				D85D92691D120AC4002BC94D /* ViewController.swift */,
-				D85D926B1D120AC4002BC94D /* Main.storyboard */,
-				D85D926E1D120AC4002BC94D /* Assets.xcassets */,
-				D85D92701D120AC4002BC94D /* LaunchScreen.storyboard */,
-				D85D92731D120AC5002BC94D /* Info.plist */,
+				D8269AC01D18D7F600A3DAFE /* Constants.swift */,
+				D8269ABF1D18D7BE00A3DAFE /* Extras */,
 			);
 			path = Diction;
 			sourceTree = "<group>";
@@ -122,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D85D92721D120AC4002BC94D /* LaunchScreen.storyboard in Resources */,
+				D8269AC31D18DBD300A3DAFE /* dictionary.db in Resources */,
 				D85D926F1D120AC4002BC94D /* Assets.xcassets in Resources */,
 				D85D926D1D120AC4002BC94D /* Main.storyboard in Resources */,
 			);
@@ -135,7 +194,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D85D926A1D120AC4002BC94D /* ViewController.swift in Sources */,
+				D8269AEA1D18E07900A3DAFE /* FMDatabaseQueue.m in Sources */,
 				D85D92681D120AC4002BC94D /* AppDelegate.swift in Sources */,
+				D8269AC11D18D7F600A3DAFE /* Constants.swift in Sources */,
+				D8269AE71D18E07900A3DAFE /* FMDatabase.m in Sources */,
+				D8269AE91D18E07900A3DAFE /* FMDatabasePool.m in Sources */,
+				D8269AEB1D18E07900A3DAFE /* FMResultSet.m in Sources */,
+				D8269AC71D18DD0D00A3DAFE /* DictionaryInterface.swift in Sources */,
+				D8269AE81D18E07900A3DAFE /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,10 +316,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Diction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bacon.nelken.Diction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Diction/Diction-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -261,10 +330,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Diction/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bacon.nelken.Diction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Diction/Diction-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -287,6 +358,7 @@
 				D85D92781D120AC5002BC94D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

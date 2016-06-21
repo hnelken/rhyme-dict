@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onButton(sender: AnyObject) {
+        dict.doStuff()
         textLabel.textColor = UIColor.blackColor()
     }
 

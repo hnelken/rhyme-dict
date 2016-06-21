@@ -13,9 +13,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    // Installs the database if not already installed
+    func createCopyOfDatabaseIfNeeded() {
+        var success: Bool
+        let fileManager = NSFileManager.defaultManager()
+        print("Attempting to install database...")
+        // Check if the database is installed
+        success = fileManager.fileExistsAtPath(appDBPath)
+        if (success) {
+            print("...Database already exists in app's document")
+            return
+        }
+        
+        do {
+            // The writable database does not exist, so copy the default to the appropriate location.
+            try fileManager.copyItemAtPath(kDefaultDBPath!, toPath: appDBPath)
+            print("...Successfully copied database from bundle to app's document")
+            
+        }
+        catch {
+            // Something went wrong
+            print("...Failed to create writable database file")
+        }
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        createCopyOfDatabaseIfNeeded()
+        
         return true
     }
 
