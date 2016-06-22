@@ -8,6 +8,9 @@
 
 import Foundation
 
+// STORYBOARD CONSTANTS
+let kWordCellID = "wordCell"
+
 // DATABASE CONSTANTS
 let dict = DictionaryInterface()
 let kDBName = "dictionary.db"

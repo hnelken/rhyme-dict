@@ -16,6 +16,8 @@
 		D8269AE91D18E07900A3DAFE /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269AE11D18E07900A3DAFE /* FMDatabasePool.m */; };
 		D8269AEA1D18E07900A3DAFE /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269AE31D18E07900A3DAFE /* FMDatabaseQueue.m */; };
 		D8269AEB1D18E07900A3DAFE /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269AE61D18E07900A3DAFE /* FMResultSet.m */; };
+		D8269AEE1D1B22C000A3DAFE /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AED1D1B22C000A3DAFE /* WordListViewController.swift */; };
+		D8269AF01D1B29B400A3DAFE /* DefinitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AEF1D1B29B400A3DAFE /* DefinitionViewController.swift */; };
 		D85D92681D120AC4002BC94D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D92671D120AC4002BC94D /* AppDelegate.swift */; };
 		D85D926A1D120AC4002BC94D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D92691D120AC4002BC94D /* ViewController.swift */; };
 		D85D926D1D120AC4002BC94D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85D926B1D120AC4002BC94D /* Main.storyboard */; };
@@ -40,6 +42,8 @@
 		D8269AE41D18E07900A3DAFE /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = fmdb/FMDB.h; sourceTree = "<group>"; };
 		D8269AE51D18E07900A3DAFE /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = fmdb/FMResultSet.h; sourceTree = "<group>"; };
 		D8269AE61D18E07900A3DAFE /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = fmdb/FMResultSet.m; sourceTree = "<group>"; };
+		D8269AED1D1B22C000A3DAFE /* WordListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
+		D8269AEF1D1B29B400A3DAFE /* DefinitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionViewController.swift; sourceTree = "<group>"; };
 		D85D92641D120AC4002BC94D /* Diction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85D92671D120AC4002BC94D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D85D92691D120AC4002BC94D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 			children = (
 				D85D926B1D120AC4002BC94D /* Main.storyboard */,
 				D85D92701D120AC4002BC94D /* LaunchScreen.storyboard */,
+				D8269AEF1D1B29B400A3DAFE /* DefinitionViewController.swift */,
+				D8269AED1D1B22C000A3DAFE /* WordListViewController.swift */,
 				D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */,
 				D85D92671D120AC4002BC94D /* AppDelegate.swift */,
 				D85D92691D120AC4002BC94D /* ViewController.swift */,
@@ -195,9 +201,11 @@
 			files = (
 				D85D926A1D120AC4002BC94D /* ViewController.swift in Sources */,
 				D8269AEA1D18E07900A3DAFE /* FMDatabaseQueue.m in Sources */,
+				D8269AEE1D1B22C000A3DAFE /* WordListViewController.swift in Sources */,
 				D85D92681D120AC4002BC94D /* AppDelegate.swift in Sources */,
 				D8269AC11D18D7F600A3DAFE /* Constants.swift in Sources */,
 				D8269AE71D18E07900A3DAFE /* FMDatabase.m in Sources */,
+				D8269AF01D1B29B400A3DAFE /* DefinitionViewController.swift in Sources */,
 				D8269AE91D18E07900A3DAFE /* FMDatabasePool.m in Sources */,
 				D8269AEB1D18E07900A3DAFE /* FMResultSet.m in Sources */,
 				D8269AC71D18DD0D00A3DAFE /* DictionaryInterface.swift in Sources */,
