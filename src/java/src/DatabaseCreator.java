@@ -67,6 +67,7 @@ public class DatabaseCreator {
 	
 	// Parse and execute a single line command of SQL
 	private static void executeLine(String line, Statement stmt, Connection c) throws Exception {
+		Line cleanLine = null;
 		// Insert lines take special attention
 		if (line.contains("INSERT")) {
 			if (line.contains("wn_gloss") && line.contains("\\")) {
@@ -75,80 +76,46 @@ public class DatabaseCreator {
 			}
 			else if (line.contains("wn_synset")) {
 				// Clean the word inserts thoroughly
-				line = cleanSQLWordInsert(line, c);
+				cleanLine = new Line(line);	//cleanSQLWordInsert(line, c);
+				line = cleanLine.getSQL();
 			}
 		}
 
 		// Execute the SQL statement
-		if (null != line) {
+		try {
 			stmt.executeUpdate(line);
 		}
+		catch (SQLException ex) {
+	    	if (ex.getMessage().contains("UNIQUE")) {
+	    		rerouteWord(cleanLine, c);
+	    	}
+	    	else {
+		    	System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+		    	System.exit(0);	
+	    	}
+		}
 	}
 	
-	// Thoroughly clean the word inserts
-	private static String cleanSQLWordInsert(String line, Connection c) throws Exception {
-		String pre = null;
-		String word = null;
-		
-		// Split the line where the word attribute starts
-		if (line.charAt(43) == ',') {
-			pre = line.substring(0, 44);
-			word = line.substring(45);
-		}
-		else {
-			pre = line.substring(0, 45);
-			word = line.substring(46);
-		}
-
-		// Split at the end of the word attribute as well
-		int endWord = word.indexOf('\'');
-		boolean searching = true;
-		while (searching) {
-			if (word.charAt(endWord + 1) != ',') {
-				endWord = word.indexOf('\'', endWord + 1);
-			}
-			else {
-				searching = false;
-			}
-		}
-		word = word.substring(0, endWord);
-		
-		// Clean the word section of the string
-		word = word.replace("\\", "");
-		word = word.replaceAll("\\(.*\\)", "");
-		word = word.toUpperCase();
-		
-		boolean wordExists = rerouteWords(pre, word, c);
-		
-		// Return a truncated entry with cleaned word attribute
-		return (wordExists) ? null : pre + "\"" + word + "\"" + ");";
-	}
-	
-	private static boolean rerouteWords(String pre, String word, Connection c) throws Exception {
+	// Reroute the definitions of previously entered words so words are unique in the DB
+	private static void rerouteWord(Line line, Connection c) throws Exception {
 		
 		// Check if word already exists
 		String sql = "SELECT * FROM wn_synset WHERE word=? GROUP BY word";
 		PreparedStatement query = c.prepareStatement(sql);
-		query.setString(1, word);
-
+		query.setString(1, line.getWord());
 		ResultSet results = query.executeQuery();
+		
+		// Words are unique, one result at most
 		if (results.next()) {
 			// Get existing words id to reroute definition
 			int rerouteID = results.getInt("synset_id");
-
-			// Separate this words synset ID from the SQL insert
-			String[] parts = pre.split(",");
-			String id = parts[0].substring(parts[0].length() - 9);
-			int synsetID = Integer.parseInt(id);
 			
 			// Insert a row that reroutes this word's definition to the existing word
 			sql = "INSERT INTO mult_def(synset_id, rrt_id) VALUES(?, ?)";
 			PreparedStatement insert = c.prepareStatement(sql);
-			insert.setInt(1, synsetID);
+			insert.setInt(1, line.getSynsetID());
 			insert.setInt(2, rerouteID);
 			insert.executeUpdate();
-			return true;
 		}
-		return false;
 	}
 }
