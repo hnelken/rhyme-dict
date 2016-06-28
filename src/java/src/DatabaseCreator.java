@@ -47,7 +47,7 @@ public class DatabaseCreator {
 	    		}
 	    		else {
 	    			// Execute single line command
-	    			executeLine(line, stmt);
+	    			executeLine(line, stmt, c);
 	    		}
 	    	}
 	    	
@@ -66,7 +66,7 @@ public class DatabaseCreator {
     }
 	
 	// Parse and execute a single line command of SQL
-	private static void executeLine(String line, Statement stmt) throws Exception {
+	private static void executeLine(String line, Statement stmt, Connection c) throws Exception {
 		// Insert lines take special attention
 		if (line.contains("INSERT")) {
 			if (line.contains("wn_gloss") && line.contains("\\")) {
@@ -75,16 +75,18 @@ public class DatabaseCreator {
 			}
 			else if (line.contains("wn_synset")) {
 				// Clean the word inserts thoroughly
-				line = cleanSQLWordInsert(line);
+				line = cleanSQLWordInsert(line, c);
 			}
 		}
 
 		// Execute the SQL statement
-		stmt.executeUpdate(line);
+		if (null != line) {
+			stmt.executeUpdate(line);
+		}
 	}
 	
 	// Thoroughly clean the word inserts
-	private static String cleanSQLWordInsert(String line) {
+	private static String cleanSQLWordInsert(String line, Connection c) throws Exception {
 		String pre = null;
 		String word = null;
 		
@@ -114,9 +116,39 @@ public class DatabaseCreator {
 		// Clean the word section of the string
 		word = word.replace("\\", "");
 		word = word.replaceAll("\\(.*\\)", "");
-		word = "\"" + word.toUpperCase() + "\"";
+		word = word.toUpperCase();
+		
+		boolean wordExists = rerouteWords(pre, word, c);
 		
 		// Return a truncated entry with cleaned word attribute
-		return pre + word + ", 0);";
+		return (wordExists) ? null : pre + "\"" + word + "\"" + ");";
+	}
+	
+	private static boolean rerouteWords(String pre, String word, Connection c) throws Exception {
+		
+		// Check if word already exists
+		String sql = "SELECT * FROM wn_synset WHERE word=? GROUP BY word";
+		PreparedStatement query = c.prepareStatement(sql);
+		query.setString(1, word);
+
+		ResultSet results = query.executeQuery();
+		if (results.next()) {
+			// Get existing words id to reroute definition
+			int rerouteID = results.getInt("synset_id");
+
+			// Separate this words synset ID from the SQL insert
+			String[] parts = pre.split(",");
+			String id = parts[0].substring(parts[0].length() - 9);
+			int synsetID = Integer.parseInt(id);
+			
+			// Insert a row that reroutes this word's definition to the existing word
+			sql = "INSERT INTO mult_def(synset_id, rrt_id) VALUES(?, ?)";
+			PreparedStatement insert = c.prepareStatement(sql);
+			insert.setInt(1, synsetID);
+			insert.setInt(2, rerouteID);
+			insert.executeUpdate();
+			return true;
+		}
+		return false;
 	}
 }
