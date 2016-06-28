@@ -18,7 +18,7 @@ class DictionaryInterface: NSObject {
         
         // Query results
         do {
-            let sql = "SELECT * FROM wn_synset"// WHERE word LIKE '\(letter)%'"
+            let sql = "SELECT * FROM wn_synset WHERE word LIKE '\(letter)%' GROUP BY word"
             let results = try db.executeQuery(sql, values: [])
             while results.next() {
                 // Get the word info

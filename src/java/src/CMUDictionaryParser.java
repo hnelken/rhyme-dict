@@ -29,9 +29,7 @@ public class CMUDictionaryParser {
 		    		String[] lines = line.split("  ");
 		    		String word = lines[0];
 		    		String prnc = lines[1];
-		    		if (wordExistsInDictionary(word, c)) {
-		    			commitPronounciation(word, prnc, c);
-		    		}
+		    		commitPronounciation(word, prnc, c);
 		    	}
 		    }
 		    
@@ -48,81 +46,71 @@ public class CMUDictionaryParser {
 
 	}
 	
-	private static boolean wordExistsInDictionary(String word, Connection c) throws Exception {
-		// Query word list for matching CMU word
-    	PreparedStatement stmt = c.prepareStatement("SELECT * FROM wn_synset WHERE word=?");
-    	stmt.setString(1, word);
+	// Inserts a pronunciation record and the links it with all matching words
+	private static void commitPronounciation(String word, String prnc, Connection c) throws Exception {
+    	int prncID = -1;
+    	boolean insertedPrnc = false;
     	
-    	// Word exists if this query returns any results
+    	// Strip CMU dictionary word of potential "(*)" suffix
+    	String cleanWord = word.replaceAll("\\(.*\\)", "");
+    	
+		// Query word list for matches with cleaned CMU word
+    	PreparedStatement stmt = c.prepareStatement("SELECT * FROM wn_synset WHERE word=?");
+    	stmt.setString(1, cleanWord);
+    	
+    	// All results must be linked to this pronunciation
     	ResultSet results = stmt.executeQuery();
-    	if (results.next()) {
-    		results.close();
-    		stmt.close();
-    		return true;
+    	while (results.next()) {
+    		// Insert the pronunciation first if it hasn't been done
+    		if (!insertedPrnc) {
+    			prncID = insertPronunciation(word, prnc, c);
+    			insertedPrnc = prncID != -1;
+    		}
+    		
+    		// Link this word with the pronunciation
+    		int synsetID = results.getInt("synset_id");
+    		int wordNum = results.getInt("w_num");
+			linkWord(synsetID, wordNum, prncID, c);
     	}
     	
     	// Close up shop and return pronunciation ID
     	results.close();
-    	stmt.close();
-    	
-    	return false;
+    	stmt.close();	
 	}
-	
-	// Inserts a pronunciation record and the links it with all matching words
-	private static void commitPronounciation(String word, String prnc, Connection c) throws Exception {
-		// Insert pronunciation into the database
-		String sql = "INSERT INTO prncs(word, prnc) VALUES(?, ?)";
-		PreparedStatement stmt = c.prepareStatement(sql);
+
+	// Inserts a pronunciation into the database
+	private static int insertPronunciation(String word, String prnc, Connection c) throws Exception {
+		PreparedStatement stmt = c.prepareStatement("INSERT INTO prncs(word, prnc) VALUES(?, ?)");
 		stmt.setString(1, word);
 		stmt.setString(2, prnc);
 		stmt.executeUpdate();
-					
-		// Get the pronunciation's id
-		int prncID = getPronounciationID(word, c);
-					
-		linkWord(word, prncID, c);
+		stmt.close();
+		
+		// Return the pronunciation's id
+		return getPronounciationID(word, c);
 	}
 	
 	// Adds an entry into a word-pronunciation relation table
-	private static void linkWord(String word, int prncID, Connection c) throws Exception {
-		// Strip CMU dictionary word of potential "(*)" suffix
-		word = word.replaceAll("\\(.*\\)", "");
-		
-		// Query words in database for matches to CMU word, then insert record in relation table
-    	PreparedStatement insert = c.prepareStatement("INSERT INTO word_prnc VALUES(?, ?, ?)");
-    	PreparedStatement query = c.prepareStatement("SELECT * FROM wn_synset WHERE word=?");
-    	query.setString(1, word);
-    	
-    	ResultSet results = query.executeQuery();
-    	while (results.next()) {
-    		// Get IDs from matched entry
-    		int synsetID = results.getInt("synset_id");
-    		int wordNum = results.getInt("w_num");
-    		
-    		// For each result, add an entry in the word_prnc relation table
-    		insert.setInt(1, synsetID);
-    		insert.setInt(2, wordNum);
-    		insert.setInt(3, prncID);
-    		
-    		insert.executeUpdate();
-    	}
-    	
-    	// Close up shop and return word ID
-    	results.close();
-    	insert.close();
-    	query.close();
+	private static void linkWord(int synsetID, int wordNum, int prncID, Connection c) throws Exception {
+		// Entry consists of word's (synset_id, w_num) key and pronunciation's id
+    	PreparedStatement stmt = c.prepareStatement("INSERT INTO word_prnc VALUES(?, ?, ?)");
+    	stmt.setInt(1, synsetID);
+    	stmt.setInt(2, wordNum);
+    	stmt.setInt(3, prncID);
+    	stmt.executeUpdate();
+    	stmt.close();
 	}
 	
 	// Returns an ID for a word in the CMU pronouncing dictionary
 	private static int getPronounciationID(String word, Connection c) throws Exception {
-		// Query pronunciations for matching CMU word
+		// Query pronunciations for matching unique CMU word
     	PreparedStatement stmt = c.prepareStatement("SELECT prnc_id FROM prncs WHERE word=?");
     	stmt.setString(1, word);
 		int prncID = -1;
     	
-    	// Word exists if this query returns any results
+    	// Pronunciation exists if this query returns ANY results
     	ResultSet results = stmt.executeQuery();
-    	while (results.next()) {
+    	if (results.next()) {
     		prncID = results.getInt("prnc_id");
     	}
     	
