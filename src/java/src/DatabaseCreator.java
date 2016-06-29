@@ -87,6 +87,7 @@ public class DatabaseCreator {
 		}
 		catch (SQLException ex) {
 	    	if (ex.getMessage().contains("UNIQUE")) {
+	    		//System.out.println("rerouting: " + cleanLine.getWord());
 	    		rerouteWord(cleanLine, c);
 	    	}
 	    	else {
