@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D8269ABE1D18D74900A3DAFE /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8269ABD1D18D74900A3DAFE /* libsqlite3.0.tbd */; };
 		D8269AC11D18D7F600A3DAFE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AC01D18D7F600A3DAFE /* Constants.swift */; };
-		D8269AC31D18DBD300A3DAFE /* dictionary.db in Resources */ = {isa = PBXBuildFile; fileRef = D8269AC21D18DBD300A3DAFE /* dictionary.db */; };
 		D8269AC71D18DD0D00A3DAFE /* DictionaryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */; };
 		D8269AE71D18E07900A3DAFE /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269ADD1D18E07900A3DAFE /* FMDatabase.m */; };
 		D8269AE81D18E07900A3DAFE /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8269ADF1D18E07900A3DAFE /* FMDatabaseAdditions.m */; };
@@ -23,12 +22,13 @@
 		D85D926D1D120AC4002BC94D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85D926B1D120AC4002BC94D /* Main.storyboard */; };
 		D85D926F1D120AC4002BC94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85D926E1D120AC4002BC94D /* Assets.xcassets */; };
 		D85D92721D120AC4002BC94D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85D92701D120AC4002BC94D /* LaunchScreen.storyboard */; };
+		D8FAC0301D238355007DCED0 /* dictionary.db in Resources */ = {isa = PBXBuildFile; fileRef = D8FAC02F1D238355007DCED0 /* dictionary.db */; };
+		D8FAC0321D239742007DCED0 /* LetterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FAC0311D239742007DCED0 /* LetterSelectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D8269ABD1D18D74900A3DAFE /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		D8269AC01D18D7F600A3DAFE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D8269AC21D18DBD300A3DAFE /* dictionary.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = dictionary.db; sourceTree = "<group>"; };
 		D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryInterface.swift; sourceTree = "<group>"; };
 		D8269ADB1D18E07800A3DAFE /* Diction-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Diction-Bridging-Header.h"; sourceTree = "<group>"; };
 		D8269ADC1D18E07900A3DAFE /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = fmdb/FMDatabase.h; sourceTree = "<group>"; };
@@ -51,6 +51,8 @@
 		D85D926E1D120AC4002BC94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D85D92711D120AC4002BC94D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D85D92731D120AC5002BC94D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8FAC02F1D238355007DCED0 /* dictionary.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = dictionary.db; sourceTree = "<group>"; };
+		D8FAC0311D239742007DCED0 /* LetterSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +72,6 @@
 			children = (
 				D8269AEC1D18E08200A3DAFE /* fmdb */,
 				D8269ADB1D18E07800A3DAFE /* Diction-Bridging-Header.h */,
-				D8269AC21D18DBD300A3DAFE /* dictionary.db */,
 				D85D926E1D120AC4002BC94D /* Assets.xcassets */,
 				D85D92731D120AC5002BC94D /* Info.plist */,
 				D8269ABD1D18D74900A3DAFE /* libsqlite3.0.tbd */,
@@ -81,6 +82,7 @@
 		D8269AEC1D18E08200A3DAFE /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
+				D8FAC02F1D238355007DCED0 /* dictionary.db */,
 				D8269ADC1D18E07900A3DAFE /* FMDatabase.h */,
 				D8269ADD1D18E07900A3DAFE /* FMDatabase.m */,
 				D8269ADE1D18E07900A3DAFE /* FMDatabaseAdditions.h */,
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				D85D926B1D120AC4002BC94D /* Main.storyboard */,
+				D8FAC0311D239742007DCED0 /* LetterSelectViewController.swift */,
 				D85D92701D120AC4002BC94D /* LaunchScreen.storyboard */,
 				D8269AEF1D1B29B400A3DAFE /* DefinitionViewController.swift */,
 				D8269AED1D1B22C000A3DAFE /* WordListViewController.swift */,
@@ -186,9 +189,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D85D92721D120AC4002BC94D /* LaunchScreen.storyboard in Resources */,
-				D8269AC31D18DBD300A3DAFE /* dictionary.db in Resources */,
 				D85D926F1D120AC4002BC94D /* Assets.xcassets in Resources */,
 				D85D926D1D120AC4002BC94D /* Main.storyboard in Resources */,
+				D8FAC0301D238355007DCED0 /* dictionary.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8FAC0321D239742007DCED0 /* LetterSelectViewController.swift in Sources */,
 				D85D926A1D120AC4002BC94D /* ViewController.swift in Sources */,
 				D8269AEA1D18E07900A3DAFE /* FMDatabaseQueue.m in Sources */,
 				D8269AEE1D1B22C000A3DAFE /* WordListViewController.swift in Sources */,

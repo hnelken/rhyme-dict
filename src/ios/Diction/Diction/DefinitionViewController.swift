@@ -18,8 +18,12 @@ class DefinitionViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         wordLabel.text = word[1] as? String
-        definitionLabel.text = dict.getDefinitionForWord(word[0] as! NSNumber)
+        let defs = dict.getDefinitionsForWord(word[0] as! NSNumber)
+        definitionLabel.text = defs[0]
     }
 
     override func didReceiveMemoryWarning() {

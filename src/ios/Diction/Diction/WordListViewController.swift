@@ -10,14 +10,14 @@ import UIKit
 
 class WordListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private var selectedWord: [AnyObject] = [0, "No word selected"]
-    private var words: [[AnyObject]] = [[0, "No words found"]]
+    var words: [[AnyObject]] = [[0, "No words found"]]
+    
+    @IBOutlet weak var wordsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        words = dict.getWordsForLetter("A")
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,13 +36,13 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kWordCellID)
         
-        cell?.textLabel?.text = words[indexPath.row][1] as? String
+        let word = words[indexPath.row][1] as? String
+        cell?.textLabel?.text = cleanWord(word!)
         
         return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedWord = words[indexPath.row]
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
@@ -51,8 +51,16 @@ class WordListViewController: UIViewController, UITableViewDelegate, UITableView
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let vc = segue.destinationViewController as? DefinitionViewController {
-            vc.word = selectedWord
+            
+            let path = wordsTable.indexPathForSelectedRow!
+            vc.word = words[path.row]
         }
+    }
+    
+    private func cleanWord(word: String) -> String {
+        
+        return word.stringByReplacingOccurrencesOfString("_", withString: " ").lowercaseString.capitalizedString
+        
     }
 
 }
