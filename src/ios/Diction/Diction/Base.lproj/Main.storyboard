@@ -155,8 +155,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gb8-ra-g86">
-                                <rect key="frame" x="20" y="214" width="560" height="172"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gb8-ra-g86">
+                                <rect key="frame" x="56" y="214" width="488" height="172"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="172" id="HMU-rz-d19"/>
                                 </constraints>
@@ -177,10 +177,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Gb8-ra-g86" firstAttribute="centerX" secondItem="KtB-K5-YBN" secondAttribute="centerX" id="21K-3b-7ag"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="Gb8-ra-g86" secondAttribute="leading" id="Cpk-pz-b8b"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Gb8-ra-g86" secondAttribute="leading" constant="-36" id="Cpk-pz-b8b"/>
                             <constraint firstItem="TB1-Iw-HqW" firstAttribute="leading" secondItem="KtB-K5-YBN" secondAttribute="leadingMargin" constant="36" id="Jnm-ao-jjT"/>
                             <constraint firstItem="Gb8-ra-g86" firstAttribute="top" secondItem="TB1-Iw-HqW" secondAttribute="bottom" constant="8" id="diE-67-oDU"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Gb8-ra-g86" secondAttribute="trailing" id="i4K-Hz-qjZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gb8-ra-g86" secondAttribute="trailing" constant="36" id="i4K-Hz-qjZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TB1-Iw-HqW" secondAttribute="trailing" id="pdC-Bz-GjS"/>
                             <constraint firstItem="Gb8-ra-g86" firstAttribute="centerY" secondItem="KtB-K5-YBN" secondAttribute="centerY" id="rjb-Da-Zya"/>
                         </constraints>
