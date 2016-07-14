@@ -9,6 +9,7 @@
 import Foundation
 
 // STORYBOARD CONSTANTS
+let kDefinitionCellID = "defCell"
 let kWordCellID = "wordCell"
 
 // DATABASE CONSTANTS

@@ -58,7 +58,7 @@ class DictionaryInterface: NSObject {
             
             // Get all definitions from accumulated ids
             for i in 0...ids.count - 1 {
-                sql = "SELECT gloss FROM wn_gloss WHERE synset_id=\(ids[i])"
+                sql = "SELECT gloss FROM wn_gloss WHERE synset_id=\(ids[i]) group by synset_id"
                 results = try db.executeQuery(sql, values: [])
                 if results.next() {
                     // Get the definition

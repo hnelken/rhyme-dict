@@ -8,11 +8,13 @@
 
 import UIKit
 
-class DefinitionViewController: UIViewController {
+class DefinitionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var word: [AnyObject] = [0, "No word selected"]
+    var defs: [String] = []
+
+    @IBOutlet weak var defsTable: UITableView!
     @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var definitionLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +24,7 @@ class DefinitionViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         wordLabel.text = word[1] as? String
-        let defs = dict.getDefinitionsForWord(word[0] as! NSNumber)
-        definitionLabel.text = defs[0]
+        defs = dict.getDefinitionsForWord(word[0] as! NSNumber)
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +32,40 @@ class DefinitionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return defs.count
+    }
+    
+    //func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    
+    //    return 150
+    
+    //}
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(kDefinitionCellID) as! DefinitionCell
+        
+        let definition = defs[indexPath.row]
+        var exampleIndex = definition.endIndex
+        
+        let range: Range<String.Index>? = definition.rangeOfString("\"")
+        if let example = range {
+            exampleIndex = example.startIndex
+            cell.definitionLabel.text = definition.substringToIndex(exampleIndex)
+            cell.exampleLabel.text = definition.substringFromIndex(exampleIndex)
+        }
+        else {
+            cell.definitionLabel.text = definition
+            cell.exampleLabel.text = ""
+        }
+                
+        return cell
+    }
 
     /*
     // MARK: - Navigation

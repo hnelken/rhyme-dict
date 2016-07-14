@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D810A2781D36FBDE00526C2C /* DefinitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D810A2771D36FBDE00526C2C /* DefinitionCell.swift */; };
 		D8269ABE1D18D74900A3DAFE /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8269ABD1D18D74900A3DAFE /* libsqlite3.0.tbd */; };
 		D8269AC11D18D7F600A3DAFE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AC01D18D7F600A3DAFE /* Constants.swift */; };
 		D8269AC71D18DD0D00A3DAFE /* DictionaryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D810A2771D36FBDE00526C2C /* DefinitionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionCell.swift; sourceTree = "<group>"; };
 		D8269ABD1D18D74900A3DAFE /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		D8269AC01D18D7F600A3DAFE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryInterface.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				D85D926B1D120AC4002BC94D /* Main.storyboard */,
+				D810A2771D36FBDE00526C2C /* DefinitionCell.swift */,
 				D8FAC0311D239742007DCED0 /* LetterSelectViewController.swift */,
 				D85D92701D120AC4002BC94D /* LaunchScreen.storyboard */,
 				D8269AEF1D1B29B400A3DAFE /* DefinitionViewController.swift */,
@@ -207,6 +210,7 @@
 				D8269AEA1D18E07900A3DAFE /* FMDatabaseQueue.m in Sources */,
 				D8269AEE1D1B22C000A3DAFE /* WordListViewController.swift in Sources */,
 				D85D92681D120AC4002BC94D /* AppDelegate.swift in Sources */,
+				D810A2781D36FBDE00526C2C /* DefinitionCell.swift in Sources */,
 				D8269AC11D18D7F600A3DAFE /* Constants.swift in Sources */,
 				D8269AE71D18E07900A3DAFE /* FMDatabase.m in Sources */,
 				D8269AF01D1B29B400A3DAFE /* DefinitionViewController.swift in Sources */,
