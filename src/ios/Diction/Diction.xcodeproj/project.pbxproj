@@ -19,10 +19,11 @@
 		D8269AEE1D1B22C000A3DAFE /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AED1D1B22C000A3DAFE /* WordListViewController.swift */; };
 		D8269AF01D1B29B400A3DAFE /* DefinitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8269AEF1D1B29B400A3DAFE /* DefinitionViewController.swift */; };
 		D85D92681D120AC4002BC94D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D92671D120AC4002BC94D /* AppDelegate.swift */; };
-		D85D926A1D120AC4002BC94D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85D92691D120AC4002BC94D /* ViewController.swift */; };
 		D85D926D1D120AC4002BC94D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85D926B1D120AC4002BC94D /* Main.storyboard */; };
 		D85D926F1D120AC4002BC94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85D926E1D120AC4002BC94D /* Assets.xcassets */; };
 		D85D92721D120AC4002BC94D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85D92701D120AC4002BC94D /* LaunchScreen.storyboard */; };
+		D8DCFD7F1D4CFA2100363030 /* RhymeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCFD7E1D4CFA2100363030 /* RhymeListViewController.swift */; };
+		D8DCFD811D4D01C800363030 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DCFD801D4D01C800363030 /* SearchViewController.swift */; };
 		D8FAC0301D238355007DCED0 /* dictionary.db in Resources */ = {isa = PBXBuildFile; fileRef = D8FAC02F1D238355007DCED0 /* dictionary.db */; };
 		D8FAC0321D239742007DCED0 /* LetterSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FAC0311D239742007DCED0 /* LetterSelectViewController.swift */; };
 /* End PBXBuildFile section */
@@ -48,11 +49,12 @@
 		D8269AEF1D1B29B400A3DAFE /* DefinitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionViewController.swift; sourceTree = "<group>"; };
 		D85D92641D120AC4002BC94D /* Diction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85D92671D120AC4002BC94D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D85D92691D120AC4002BC94D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D85D926C1D120AC4002BC94D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D85D926E1D120AC4002BC94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D85D92711D120AC4002BC94D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D85D92731D120AC5002BC94D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8DCFD7E1D4CFA2100363030 /* RhymeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhymeListViewController.swift; sourceTree = "<group>"; };
+		D8DCFD801D4D01C800363030 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Diction/SearchViewController.swift; sourceTree = "<group>"; };
 		D8FAC02F1D238355007DCED0 /* dictionary.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = dictionary.db; sourceTree = "<group>"; };
 		D8FAC0311D239742007DCED0 /* LetterSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterSelectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +105,7 @@
 		D85D925B1D120AC4002BC94D = {
 			isa = PBXGroup;
 			children = (
+				D8DCFD801D4D01C800363030 /* SearchViewController.swift */,
 				D85D92661D120AC4002BC94D /* Diction */,
 				D85D92651D120AC4002BC94D /* Products */,
 			);
@@ -120,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				D85D926B1D120AC4002BC94D /* Main.storyboard */,
+				D8DCFD7E1D4CFA2100363030 /* RhymeListViewController.swift */,
 				D810A2771D36FBDE00526C2C /* DefinitionCell.swift */,
 				D8FAC0311D239742007DCED0 /* LetterSelectViewController.swift */,
 				D85D92701D120AC4002BC94D /* LaunchScreen.storyboard */,
@@ -127,7 +131,6 @@
 				D8269AED1D1B22C000A3DAFE /* WordListViewController.swift */,
 				D8269AC61D18DD0D00A3DAFE /* DictionaryInterface.swift */,
 				D85D92671D120AC4002BC94D /* AppDelegate.swift */,
-				D85D92691D120AC4002BC94D /* ViewController.swift */,
 				D8269AC01D18D7F600A3DAFE /* Constants.swift */,
 				D8269ABF1D18D7BE00A3DAFE /* Extras */,
 			);
@@ -206,7 +209,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8FAC0321D239742007DCED0 /* LetterSelectViewController.swift in Sources */,
-				D85D926A1D120AC4002BC94D /* ViewController.swift in Sources */,
 				D8269AEA1D18E07900A3DAFE /* FMDatabaseQueue.m in Sources */,
 				D8269AEE1D1B22C000A3DAFE /* WordListViewController.swift in Sources */,
 				D85D92681D120AC4002BC94D /* AppDelegate.swift in Sources */,
@@ -214,7 +216,9 @@
 				D8269AC11D18D7F600A3DAFE /* Constants.swift in Sources */,
 				D8269AE71D18E07900A3DAFE /* FMDatabase.m in Sources */,
 				D8269AF01D1B29B400A3DAFE /* DefinitionViewController.swift in Sources */,
+				D8DCFD811D4D01C800363030 /* SearchViewController.swift in Sources */,
 				D8269AE91D18E07900A3DAFE /* FMDatabasePool.m in Sources */,
+				D8DCFD7F1D4CFA2100363030 /* RhymeListViewController.swift in Sources */,
 				D8269AEB1D18E07900A3DAFE /* FMResultSet.m in Sources */,
 				D8269AC71D18DD0D00A3DAFE /* DictionaryInterface.swift in Sources */,
 				D8269AE81D18E07900A3DAFE /* FMDatabaseAdditions.m in Sources */,
